@@ -30,10 +30,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _value1 = TextEditingController();
-  final TextEditingController _value2 = TextEditingController();
-  final TextEditingController _value3 = TextEditingController();
-  final TextEditingController soma = TextEditingController();
+  final TextEditingController _username = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  bool _color = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,48 +48,43 @@ class _MyHomePageState extends State<MyHomePage> {
               child: TextField(
                 keyboardType: TextInputType.number,
                 decoration:
-                    const InputDecoration(labelText: "Digite um numero"),
+                    const InputDecoration(labelText: "Digite o seu nome"),
                 style: const TextStyle(fontSize: 20),
-                controller: _value3,
+                controller: _username,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
               child: TextField(
                 keyboardType: TextInputType.number,
-                decoration:
-                    const InputDecoration(labelText: "Digite um numero"),
+                decoration: const InputDecoration(labelText: "Digite a senha"),
                 style: const TextStyle(fontSize: 20),
-                controller: _value2,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                decoration:
-                    const InputDecoration(labelText: "Digite um numero"),
-                style: const TextStyle(fontSize: 20),
-                controller: _value1,
+                controller: _password,
               ),
             ),
             Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        int value1 = int.parse(_value1.text);
-                        int value2 = int.parse(_value2.text);
-                        int value3 = int.parse(_value3.text);
-                        soma.text = (value1 + value2 + value3).toString();
-                        print(soma.text);
-                      });
+                      print(_color);
+                      if (_username.text == "Senai" &&
+                          _password.text == "mobile23") {
+                        setState(() {
+                          _color = true;
+                        });
+                      } else {
+                        setState(() {
+                          _color = false;
+                        });
+                      }
                     },
                     child: const Text("Somar"))),
-            Text(soma.text,
-                style: const TextStyle(
-                  fontSize: 30,
-                )),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              color: _color ? Colors.green : Colors.red,
+              width: 50,
+              height: 50,
+            ),
           ],
         ),
       ),
